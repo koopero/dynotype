@@ -1,0 +1,28 @@
+{
+  "name": "loopin-rastertext",
+  "version": "0.1.0",
+  "description": "Bitmap test for Loopin, with emoji support",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "asturur-noto-emoji": "^3.0.3",
+    "datauri": "^1.0.5",
+    "emojione-assets": "^3.1.1",
+    "file-url": "^2.0.2",
+    "fs-extra": "^4.0.2",
+    "google-fonts-complete": "^1.2.0",
+    "handlebars": "^4.0.11",
+    "lodash": "^4.17.4",
+    "maxrects-packer": "^1.2.0",
+    "phantom": "^4.0.9",
+    "runes": "^0.4.3",
+    "tempfile": "^2.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2"
+  }
+}

@@ -1,0 +1,41 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body, html {
+      width: {{width}}px;
+      height: {{height}}px;
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    td {
+      width: {{tdWidth}}px;
+      height: {{tdHeight}}px;
+      vertical-align: bottom;
+      overflow: hidden;
+      padding: 1px;
+    }
+
+    td {
+      font-size: {{fontSize}}px;
+      color: white;
+    }
+
+    span {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+  <table>
+    {{#tableRows}}
+    <tr>
+      {{#cols}}
+        <td id='{{index}}'><span>{{text}}</span></td>
+      {{/cols}}
+    </tr>
+    {{/tableRows}}
+  </table>
+</html>
