@@ -2,19 +2,49 @@
 <head>
   <meta charset="UTF-8">
   <style>
+    body, html, table, tr, td, span {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+    }
+
+    body, html, table, tr, td {
+      overflow: hidden;
+    }
+
+
     body, html {
       width: {{width}}px;
       height: {{height}}px;
-      overflow: hidden;
-      margin: 0;
-      padding: 0;
+    }
+
+    {{#fonts}}
+    @font-face {
+      family: '{{family}}';
+      font-style: normal;
+      font-weight: {{weight}};
+      src: url({{src}}) format('truetype');
+    }
+    {{/fonts}}
+
+    {{#fonts}}
+    .font{{index}} {
+      font-family: '{{family}}';
+      font-style: normal;
+      font-weight: {{weight}};
+    }
+    {{/fonts}}
+
+    tr, td {
+      line-height: 1;
+      height: {{tdHeight}}px;
+      max-height: {{tdHeight}}px;
     }
 
     td {
       width: {{tdWidth}}px;
-      height: {{tdHeight}}px;
-      vertical-align: bottom;
-      overflow: hidden;
+      max-width: {{tdWidth}}px;
+      vertical-align: top;
       padding: 1px;
     }
 
@@ -33,7 +63,7 @@
     {{#tableRows}}
     <tr>
       {{#cols}}
-        <td id='{{index}}'><span>{{text}}</span></td>
+        <td id='{{index}}'><span class='font{{ font }}'>{{text}}</span></td>
       {{/cols}}
     </tr>
     {{/tableRows}}

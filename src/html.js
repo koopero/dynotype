@@ -2,17 +2,14 @@ async function html( {
   geom,
   fonts = [],
   glyphs = [],
-  include = ''
 } = {} ) {
-  console.log('glyphs', glyphs)
-  console.log('include', include)
 
-  glyphs = await require('./glyphs')( {
-    include, glyphs
-  } )
+  fonts = fonts.map( ( font, index ) => ( { ...font, index } ) )
 
-  glyphs = glyphs.map( async ( glyph ) => glyph )
-  glyphs = await Promise.all( glyphs )
+  glyphs = glyphs.map( ( glyph ) => ({ ...glyph, font: glyph.font || 0 } ) )
+  // glyphs = await Promise.all( glyphs )
+
+
 
 
   let tableRows = []
@@ -29,6 +26,7 @@ async function html( {
   }
 
   let data = {
+    fonts,
     rows: geom.rows,
     cols: geom.cols,
     fontSize: geom.size,
@@ -39,15 +37,13 @@ async function html( {
     tableRows
   }
 
+  console.log( data )
+
   let template = await loadTemplate()
 
   let html = template( data )
 
-  return {
-    html,
-    width: geom.width,
-    height: geom.height
-  }
+  return html
 }
 
 const path = require('path')

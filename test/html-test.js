@@ -1,9 +1,19 @@
+const test = require('./test')
+
 describe('html', () => {
-  it('works', () => {
+  it('works', async () => {
     const html = require('../src/html')
-    let result = html( {
-      include: 'the quick brown fox 🦊 jumped over the lazy sheep dog 🐶'
+        , fonts = await test.fonts()
+        , glyphs = await test.glyphs()
+        , geom = require('../src/geometry')( { size: 64, glyphs } )
+
+    let result = await html( {
+      fonts,
+      geom, glyphs
     } )
+
     console.log( result )
+
+    await test.scratchOutput( 'html-test.html', result )
   })
 })

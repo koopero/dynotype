@@ -1,17 +1,13 @@
 module.exports = geometry
 
-async function geometry( {
+function geometry( {
   cols = 0,
   rows = 0,
   size = 64,
-  aspect = 1,
+  aspect = 1.5,
   glyphs = [],
   include = ''
 } = {} ) {
-
-  glyphs = await require('./glyphs')( {
-    include, glyphs
-  } )
 
   let count = glyphs.length
 
@@ -19,7 +15,7 @@ async function geometry( {
   cols = Math.max( 0, parseFloat( cols ) || 0 )
 
   if ( !rows && !cols )
-    cols = Math.ceil( Math.sqrt( count / aspect ) )
+    cols = Math.ceil( Math.sqrt( count * aspect ) )
 
   if ( !rows )
     rows = Math.ceil( count / cols )
@@ -28,14 +24,14 @@ async function geometry( {
     cols = Math.ceil( count / rows )
 
 
-  let cellWidth = Math.ceil( size * aspect )
-  let cellHeight = Math.ceil( size )
+  let cellWidth = Math.ceil( size )
+  let cellHeight = Math.ceil( size * aspect )
 
   let padding = 2
   let width = ( cellWidth + padding ) * cols
   let height = ( cellHeight + padding ) * rows
 
 
-  return { size, cols, rows, width, height, cellWidth, cellHeight, glyphs }
+  return { size, aspect, cols, rows, width, height, cellWidth, cellHeight }
 
 }

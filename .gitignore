@@ -1,3 +1,5 @@
+.DS_Store
 node_modules/
+test/scratch
 package-lock.json
 yarn.lock
