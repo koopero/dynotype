@@ -15,7 +15,7 @@ function geometry( {
   cols = Math.max( 0, parseFloat( cols ) || 0 )
 
   if ( !rows && !cols && count )
-    cols = Math.ceil( Math.sqrt( count * charHeight / charWidth ) )
+    cols = Math.min( count, Math.ceil( Math.sqrt( count * charHeight / charWidth ) ) )
 
   if ( !rows && count )
     rows = Math.ceil( count / cols )
@@ -26,9 +26,8 @@ function geometry( {
   let cellWidth = Math.ceil( size * charWidth )
   let cellHeight = Math.ceil( size * charHeight )
 
-  let padding = 2
-  let width = ( cellWidth + padding ) * cols
-  let height = ( cellHeight + padding ) * rows
+  let width = ( cellWidth ) * cols
+  let height = ( cellHeight ) * rows
 
   return { size, cols, rows, width, height, cellWidth, cellHeight }
 }

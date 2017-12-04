@@ -10,8 +10,7 @@ async function browserize( {
   file,
   geom,
   html,
-  glyphs = [],
-  include = ''
+  glyphs = []
 } = {} ) {
 
   if ( _.isObject( html ) )
@@ -36,7 +35,7 @@ async function browserize( {
         var rect = span.getBoundingClientRect()
         result[i] = {
           id: td.id,
-          width: rect.width
+          rect: rect
         }
       }
       return result
@@ -48,7 +47,7 @@ async function browserize( {
   glyphs = glyphs.map ( (glyph,index) => {
     let m = _.find( measurements, m => m.id == index )
     if ( !m ) return glyph
-    return _.extend( glyph, { aspect: m.width / geom.cellWidth } )
+    return _.extend( glyph, { rect: m.rect } )
   } )
 
   await browser.close()

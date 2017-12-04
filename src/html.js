@@ -39,7 +39,6 @@ async function html( {
   }
 
   let template = await loadTemplate()
-
   let html = template( data )
 
   return { html, glyphs }

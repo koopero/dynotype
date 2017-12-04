@@ -29,7 +29,8 @@ async function fontfile( {
   dir = 'font/',
   family = 'Roboto Mono',
   weight = 400,
-  variant
+  variant,
+  css = ''
 } ) {
 
   if ( !variant ) {
@@ -48,9 +49,9 @@ async function fontfile( {
     // file = path.relative( root, file )
   }
 
-  let css = await getCSS()
+  let googleCSS = await getCSS()
 
-  let match = /url\((.*?)\)/.exec( css )
+  let match = /url\((.*?)\)/.exec( googleCSS )
 
   let url = match[1]
 

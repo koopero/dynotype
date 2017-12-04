@@ -63,7 +63,6 @@ describe('Dynotype', () => {
   })
 
 
-
   describe('.generate', () => {
     it( 'works', async () => {
       let dyno = new Dynotype( {
@@ -82,18 +81,43 @@ describe('Dynotype', () => {
       dyno.setGeometry( { size: 48, rows: 6 } )
 
       await dyno.generate()
-      // assert.equal( dyno.fonts[0].family, family )
+      await dyno.save()
     })
 
     it( 'works from options', async () => {
       let dyno = new Dynotype( {
         name: 'Dynotype-generate-test-options',
         fonts: [ 'Dosis', 'Arvo', 'Ranchers' ],
-        glyphs: [ ' abcdefghijklmnopqrstuvwxyz01234567890' ],
+        glyphs: [ test.alphaNumeric ],
         size: 64,
         root: test.scratchPath()
       } )
       await dyno.generate()
+      await dyno.save()
+    })
+  })
+
+
+  describe('save', () => {
+    it( 'works', async () => {
+      let dyno = new Dynotype( {
+        name: 'Dynotype-save-test',
+        root: test.scratchPath()
+      } )
+
+      dyno.addFont( { css: 'top: 10%;' } )
+      dyno.addGlyphs( test.zoo )
+      dyno.setGeometry( { size: 128, charWidth: 1.1, charHeight: 1.1, rows: 7 } )
+
+      await dyno.generate()
+      await dyno.save()
+
+      let loader = new Dynotype( {
+        name: 'Dynotype-save-test',
+        root: test.scratchPath()
+      } )
+
+      await loader.load()
       // assert.equal( dyno.fonts[0].family, family )
     })
   })

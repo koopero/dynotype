@@ -2,7 +2,9 @@ const test = exports
 const path = require('path')
 const fs = require('fs-extra')
 
-
+test.zoo = '🐵🐶🐻🐶🐱🐭🐹🐰🐻🐼🐨🐯🐮🐷🐸🐵🙈🙉🙊🐒🐔🐧🐦🐤🐥🐝🐛🐌🐢🐍🐙🐠🐟🐡🐬🐳🐋🐊🐆🐅🐃🐂🐄🐪🐫🐘🐎🐖🐐🐏🐑🐕🐩🐈🐓'
+test.math = '0123456789xXeEn-+÷=*'
+test.alphaNumeric = ' abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890'
 test.assert = require('chai').assert
 
 

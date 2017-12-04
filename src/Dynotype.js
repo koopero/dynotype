@@ -2,6 +2,8 @@ const options = require('./options')
     , string  = require('./string')
     , _ = require('lodash')
     , path = require('path')
+    , yaml = require('js-yaml')
+    , fs = require('fs-extra')
     , hasher = require('object-hash')
 
 class Dynotype {
@@ -74,7 +76,7 @@ class Dynotype {
     let glyph = _.find( this.glyphs, glyph =>
       search.text == glyph.text && ( _.isUndefined( search.font ) || search.font == glyph.font )
     )
-    
+
     return glyph
   }
 
@@ -102,6 +104,42 @@ class Dynotype {
       geom: this.geometry,
       file: this.png,
     } )
+  }
+
+  yamlPath() {
+    let name = this.name || this.getHash()
+    let file = this.resolvePath( this.file || `${name}.yaml` )
+    return file
+  }
+
+  async save() {
+    let data = {
+      geometry: this.geometry,
+      fonts: this.fonts.map( options.font ),
+      glyphs: this.glyphs
+    }
+
+    let file = this.yamlPath()
+
+    if ( this.png ) {
+      data.png = path.relative( path.dirname( file ), this.png )
+    }
+
+    data = yaml.dump( data )
+    await fs.outputFile( file, data )
+
+    return { file }
+  }
+
+  async load() {
+    let file = this.yamlPath()
+    let str  = await fs.readFile( file, 'utf8' )
+    let data = yaml.safeLoad( str )
+    if ( data.png ) {
+      data.png = this.resolvePath( path.dirname( file ), data.png )
+    }
+
+    _.extend( this, data )
   }
 }
 

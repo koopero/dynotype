@@ -23,7 +23,6 @@
       font-family: '{{family}}';
       font-style: normal;
       font-weight: {{weight}};
-
       src: {{{src}}};
     }
     {{/fonts}}
@@ -33,6 +32,7 @@
       font-family: '{{family}}';
       font-style: normal;
       font-weight: {{weight}};
+      {{{css}}}
     }
     {{/fonts}}
 
@@ -45,10 +45,7 @@
     td {
       width: {{cellWidth}}px;
       max-width: {{cellWidth}}px;
-      vertical-align: middle;
-      padding-left: 12px;
-      padding-top: 8px;
-
+      vertical-align: top;
     }
 
     td {
@@ -58,6 +55,7 @@
 
     span {
       display: inline-block;
+      position: relative;
     }
   </style>
 </head>
