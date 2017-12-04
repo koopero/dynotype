@@ -4,8 +4,9 @@ const _ = require('lodash')
     , tempfile = require('tempfile')
     , path = require('path')
     , fileUrl = require('file-url')
+    , PNGImage = require('png-image')
 
-async function render( {
+async function browserize( {
   file,
   geom,
   html,
@@ -23,7 +24,7 @@ async function render( {
   const browser = require('navit')({ timeout: 30000, engine: 'phantomjs' });
   await browser.open(fileUrl( htmlFile ))
   await new Promise( resolve => setTimeout( resolve, 300 ) )
-  await browser.screenshot( file )
+  await browser.screenshot( file ).run()
 
   let measure =
     function () {
@@ -52,10 +53,18 @@ async function render( {
 
   await browser.close()
 
+  let pngImage = new PNGImage({
+      imagePath: file,
+      imageOutputPath: file,
+      cropImage: {x: 0, y: 0, width: geom.width, height: geom.height }
+  });
+
+  await pngImage.runWithPromise()
+
   return {
     file,
     glyphs
   }
 }
 
-module.exports = render
+module.exports = browserize

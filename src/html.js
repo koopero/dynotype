@@ -31,14 +31,12 @@ async function html( {
     rows: geom.rows,
     cols: geom.cols,
     fontSize: geom.size,
-    tdWidth: geom.cellWidth,
-    tdHeight: geom.cellHeight,
+    cellWidth: geom.cellWidth,
+    cellHeight: geom.cellHeight,
     width: geom.width,
     height: geom.height,
     tableRows
   }
-
-  console.log( data )
 
   let template = await loadTemplate()
 

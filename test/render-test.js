@@ -6,8 +6,9 @@ describe('render', () => {
 
     let glyphs = await test.glyphs()
     let fonts  = await test.fonts()
-    let geom   = await require('../src/geometry')( { size: 32, glyphs } )
+    let geom   = await require('../src/geometry')( { size: 128, glyphs } )
     let html = await require('../src/html')( { fonts, glyphs, geom } )
+
 
     await test.scratchOutput( 'render-test.html',  html.html )
 
@@ -15,7 +16,7 @@ describe('render', () => {
       html,
       glyphs: html.glyphs,
       geom,
-      file: test.scrathPath( (new Date().getTime() )+'.png' ),
+      file: test.scratchPath( (new Date().getTime() )+'.png' ),
     } )
     console.log( result )
   })
