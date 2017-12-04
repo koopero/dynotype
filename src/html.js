@@ -21,6 +21,7 @@ async function html( {
       glyph.col = col
       glyph.row = row
       glyph.index = index
+      glyph.html = glyph.text == ' ' ? '&nbsp;' : glyph.text
       tableRows[row].cols[col] = glyph
     }
   }
@@ -43,7 +44,7 @@ async function html( {
 
   let html = template( data )
 
-  return html
+  return { html, glyphs }
 }
 
 const path = require('path')

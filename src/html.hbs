@@ -20,10 +20,11 @@
 
     {{#fonts}}
     @font-face {
-      family: '{{family}}';
+      font-family: '{{family}}';
       font-style: normal;
       font-weight: {{weight}};
-      src: url({{src}}) format('truetype');
+
+      src: {{{src}}};
     }
     {{/fonts}}
 
@@ -44,8 +45,10 @@
     td {
       width: {{tdWidth}}px;
       max-width: {{tdWidth}}px;
-      vertical-align: top;
-      padding: 1px;
+      vertical-align: middle;
+      padding-left: 12px;
+      padding-top: 8px;
+
     }
 
     td {
@@ -63,7 +66,7 @@
     {{#tableRows}}
     <tr>
       {{#cols}}
-        <td id='{{index}}'><span class='font{{ font }}'>{{text}}</span></td>
+        <td id='{{index}}'><span class='font{{ font }}'>{{{html}}}</span></td>
       {{/cols}}
     </tr>
     {{/tableRows}}

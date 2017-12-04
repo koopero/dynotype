@@ -1,7 +1,7 @@
 {
-  "name": "loopin-rastertext",
+  "name": "rasterfont",
   "version": "0.1.0",
-  "description": "Bitmap test for Loopin, with emoji support",
+  "description": "Specialized sprite sheet creator",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,25 +9,17 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "asturur-noto-emoji": "^3.0.3",
     "datauri": "^1.0.5",
-    "electron": "^1.7.9",
-    "emojione-assets": "^3.1.1",
     "file-url": "^2.0.2",
     "fs-extra": "^4.0.2",
-    "ghostjs": "^1.13.1",
-    "google-fonts-complete": "^1.2.0",
-    "google-fonts-plugin": "^1.0.2",
     "handlebars": "^4.0.11",
+    "html-entities": "^1.2.1",
     "lodash": "^4.17.4",
-    "maxrects-packer": "^1.2.0",
     "navit": "^3.1.0",
-    "node-slimerjs": "^1.0.1",
-    "phantom": "^4.0.9",
+    "phantomjs": "^2.1.7",
+    "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "runes": "^0.4.3",
-    "slimerjs": "^0.10.3",
-    "strong-data-uri": "^1.0.4",
     "tempfile": "^2.0.0"
   },
   "devDependencies": {
