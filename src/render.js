@@ -47,7 +47,8 @@ async function browserize( {
   glyphs = glyphs.map ( (glyph,index) => {
     let m = _.find( measurements, m => m.id == index )
     if ( !m ) return glyph
-    return _.extend( glyph, { rect: m.rect } )
+    delete glyph.html
+    return _.extend( glyph, { width: m.rect.width / geom.cellWidth } )
   } )
 
   await browser.close()

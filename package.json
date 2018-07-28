@@ -1,8 +1,8 @@
 {
-  "name": "rasterfont",
+  "name": "dynotype",
   "version": "0.1.0",
   "description": "Specialized sprite sheet creator",
-  "main": "index.js",
+  "main": "src/Dynotype.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

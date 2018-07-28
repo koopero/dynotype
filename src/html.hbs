@@ -2,13 +2,14 @@
 <head>
   <meta charset="UTF-8">
   <style>
-    body, html, table, tr, td, span {
+    body, html, table, tbody, tr, td, span {
       margin: 0;
       padding: 0;
       background: transparent;
+      border: none;
     }
 
-    body, html, table, tr, td {
+    body, html, table, tbody, tr, td {
       overflow: hidden;
     }
 
@@ -51,6 +52,7 @@
     td {
       font-size: {{fontSize}}px;
       color: white;
+      position: absolute;
     }
 
     span {
@@ -64,7 +66,7 @@
     {{#tableRows}}
     <tr>
       {{#cols}}
-        <td id='{{index}}'><span class='font{{ font }}'>{{{html}}}</span></td>
+        <td id='{{index}}' style='top: {{top}}px; left: {{left}}px;'><span class='font{{ font }}'>{{{html}}}</span></td>
       {{/cols}}
     </tr>
     {{/tableRows}}

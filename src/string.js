@@ -28,11 +28,13 @@ module.exports = function string() {
   }
 
   function addString( str ) {
+    str = str.replace( /\r\n/g, '\n' )
     runes( str ).forEach( addGlyph )
   }
 
   function addGlyph( text ) {
-    let glyph = _.defaults( { text }, proto )
+    let glyph
+    glyph = _.defaults( { text }, proto )
     glyphs.push( glyph )
   }
 }

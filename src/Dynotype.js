@@ -16,7 +16,7 @@ class Dynotype {
 
     _.map( opt.fonts, font => this.addFont( font ) )
     this.addGlyphs( opt.glyphs )
-    this.setGeometry( opt )
+    this.setGeometry( opt.geometry || opt )
   }
 
   addFont( font ) {
@@ -59,8 +59,11 @@ class Dynotype {
   }
 
   getHash() {
+    let glyphs = _.map( this.glyphs, glyph => _.pick( glyph, 'text', 'font' ) )
+    let fonts  = _.map( this.fonts,  font =>  _.pick( font, 'family', 'weight', 'css' ) )
+    let geometry = _.pick( this.geometry, [ 'cellWidth', 'cellHeight'] )
     let hash = {
-      geometry: _.pick( this.geometry, [ 'cellWidth', 'cellHeight'] )
+      geometry, glyphs, fonts
     }
 
     return hasher( hash )
@@ -73,11 +76,22 @@ class Dynotype {
     if ( !search )
       return
 
-    let glyph = _.find( this.glyphs, glyph =>
-      search.text == glyph.text && ( _.isUndefined( search.font ) || search.font == glyph.font )
+    let ourGlyph = _.find( this.glyphs, testGlyph =>
+      search.text == testGlyph.text && ( _.isUndefined( search.font ) || search.font == testGlyph.font )
     )
 
-    return glyph
+    if ( !ourGlyph )
+      return
+
+    return _.extend( search, ourGlyph )
+  }
+
+  line( opt ) {
+
+    let glyphs = string( _.pick( opt, 'y', 'text', 'font' ), _.slice( arguments, 1 ) )
+    glyphs = glyphs.map( glyph => this.glyph( glyph ) )
+
+    return require('./line')( opt, glyphs )
   }
 
   async generate() {
@@ -93,10 +107,9 @@ class Dynotype {
       geom: this.geometry,
     } )
 
+    this.html = html.html
     this.glyphs = html.glyphs
-
-    let name = this.name || this.getHash()
-    this.png = this.png || this.resolvePath( `${name}.png` )
+    this.png = this.png || this.filePath('.png' )
 
     let result = await require('../src/render')( {
       html,
@@ -106,9 +119,9 @@ class Dynotype {
     } )
   }
 
-  yamlPath() {
+  filePath( extension ) {
     let name = this.name || this.getHash()
-    let file = this.resolvePath( this.file || `${name}.yaml` )
+    let file = this.resolvePath( `${name}${extension}` )
     return file
   }
 
@@ -119,7 +132,7 @@ class Dynotype {
       glyphs: this.glyphs
     }
 
-    let file = this.yamlPath()
+    let file = this.file || this.filePath('.yaml')
 
     if ( this.png ) {
       data.png = path.relative( path.dirname( file ), this.png )
@@ -128,11 +141,14 @@ class Dynotype {
     data = yaml.dump( data )
     await fs.outputFile( file, data )
 
+    if ( this.html )
+      await fs.outputFile( this.filePath('.html'), this.html )
+
     return { file }
   }
 
   async load() {
-    let file = this.yamlPath()
+    let file = this.filePath('.yaml')
     let str  = await fs.readFile( file, 'utf8' )
     let data = yaml.safeLoad( str )
     if ( data.png ) {
@@ -140,6 +156,17 @@ class Dynotype {
     }
 
     _.extend( this, data )
+  }
+
+  async refresh() {
+    try {
+      await this.load()
+      return true
+    } catch( e ) {
+
+    }
+    await this.generate()
+    await this.save()
   }
 }
 

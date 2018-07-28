@@ -1,3 +1,4 @@
+const _ = require('lodash')
 async function html( {
   geom,
   fonts = [],
@@ -21,8 +22,11 @@ async function html( {
       glyph.col = col
       glyph.row = row
       glyph.index = index
-      glyph.html = glyph.text == ' ' ? '&nbsp;' : glyph.text
-      tableRows[row].cols[col] = glyph
+      tableRows[row].cols[col] = _.merge( glyph, {
+        html: glyph.text == ' ' ? '&nbsp;' : glyph.text,
+        left: geom.cellWidth * col,
+        top: geom.cellHeight * row,
+      } )
     }
   }
 

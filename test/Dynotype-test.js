@@ -70,12 +70,12 @@ describe('Dynotype', () => {
         root: test.scratchPath()
       } )
 
-      dyno.addFont( { family: 'Quicksand', weight: 300 } )
-      dyno.addFont( { family: 'Quicksand', weight: 400 } )
-      dyno.addFont( { family: 'Quicksand', weight: 500 } )
-      dyno.addFont( { family: 'Quicksand', weight: 700 } )
+      dyno.addFont( { family: 'Pacifico', weight: 400 } )
+      // dyno.addFont( { family: 'Quicksand', weight: 400 } )
+      // dyno.addFont( { family: 'Quicksand', weight: 500 } )
+      // dyno.addFont( { family: 'Quicksand', weight: 700 } )
 
-      dyno.addGlyphs( '01234567890+-.:()t¼½[]{}*/x<>' )
+      dyno.addGlyphs( test.math )
       dyno.addGlyphs( {font:0},'🎨🔥🚬🐃' )
 
       dyno.setGeometry( { size: 48, rows: 6 } )

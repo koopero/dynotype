@@ -27,6 +27,6 @@ options.geometry = function ( opt ) {
     opt = { size: opt }
 
   return _.extend( {
-
+    
   }, opt )
 }

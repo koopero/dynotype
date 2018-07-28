@@ -1,0 +1,510 @@
+geometry:
+  size: 256
+  cols: 9
+  rows: 7
+  width: 2880
+  height: 2688
+  cellWidth: 320
+  cellHeight: 384
+fonts:
+  - family: Pacifico
+    weight: 400
+    css: ''
+glyphs:
+  - text: H
+    font: '0'
+    index: 0
+    col: 0
+    row: 0
+    left: 0
+    top: 0
+    width: 0.698388671875
+  - text: e
+    font: '0'
+    index: 1
+    col: 1
+    row: 0
+    left: 320
+    top: 0
+    width: 0.31435546875
+  - text: l
+    font: '0'
+    index: 2
+    col: 2
+    row: 0
+    left: 640
+    top: 0
+    width: 0.260791015625
+  - text: o
+    font: '0'
+    index: 3
+    col: 3
+    row: 0
+    left: 960
+    top: 0
+    width: 0.360791015625
+  - text: ','
+    font: '0'
+    index: 4
+    col: 4
+    row: 0
+    left: 1280
+    top: 0
+    width: 0.20556640625
+  - text: ' '
+    font: '0'
+    index: 5
+    col: 5
+    row: 0
+    left: 1600
+    top: 0
+    width: 0.211962890625
+  - text: w
+    font: '0'
+    index: 6
+    col: 6
+    row: 0
+    left: 1920
+    top: 0
+    width: 0.5599609375
+  - text: r
+    font: '0'
+    index: 7
+    col: 7
+    row: 0
+    left: 2240
+    top: 0
+    width: 0.36396484375
+  - text: d
+    font: '0'
+    index: 8
+    col: 8
+    row: 0
+    left: 2560
+    top: 0
+    width: 0.411962890625
+  - text: '!'
+    font: '0'
+    index: 9
+    col: 0
+    row: 1
+    left: 0
+    top: 384
+    width: 0.27197265625
+  - text: "\U0001F435"
+    font: '0'
+    index: 10
+    col: 1
+    row: 1
+    left: 320
+    top: 384
+    width: 0.8
+  - text: "\U0001F436"
+    font: '0'
+    index: 11
+    col: 2
+    row: 1
+    left: 640
+    top: 384
+    width: 0.8
+  - text: "\U0001F43B"
+    font: '0'
+    index: 12
+    col: 3
+    row: 1
+    left: 960
+    top: 384
+    width: 0.8
+  - text: "\U0001F431"
+    font: '0'
+    index: 13
+    col: 4
+    row: 1
+    left: 1280
+    top: 384
+    width: 0.8
+  - text: "\U0001F42D"
+    font: '0'
+    index: 14
+    col: 5
+    row: 1
+    left: 1600
+    top: 384
+    width: 0.8
+  - text: "\U0001F439"
+    font: '0'
+    index: 15
+    col: 6
+    row: 1
+    left: 1920
+    top: 384
+    width: 0.8
+  - text: "\U0001F430"
+    font: '0'
+    index: 16
+    col: 7
+    row: 1
+    left: 2240
+    top: 384
+    width: 0.8
+  - text: "\U0001F43C"
+    font: '0'
+    index: 17
+    col: 8
+    row: 1
+    left: 2560
+    top: 384
+    width: 0.8
+  - text: "\U0001F428"
+    font: '0'
+    index: 18
+    col: 0
+    row: 2
+    left: 0
+    top: 768
+    width: 0.8
+  - text: "\U0001F42F"
+    font: '0'
+    index: 19
+    col: 1
+    row: 2
+    left: 320
+    top: 768
+    width: 0.8
+  - text: "\U0001F42E"
+    font: '0'
+    index: 20
+    col: 2
+    row: 2
+    left: 640
+    top: 768
+    width: 0.8
+  - text: "\U0001F437"
+    font: '0'
+    index: 21
+    col: 3
+    row: 2
+    left: 960
+    top: 768
+    width: 0.8
+  - text: "\U0001F438"
+    font: '0'
+    index: 22
+    col: 4
+    row: 2
+    left: 1280
+    top: 768
+    width: 0.8
+  - text: "\U0001F648"
+    font: '0'
+    index: 23
+    col: 5
+    row: 2
+    left: 1600
+    top: 768
+    width: 0.8
+  - text: "\U0001F649"
+    font: '0'
+    index: 24
+    col: 6
+    row: 2
+    left: 1920
+    top: 768
+    width: 0.8
+  - text: "\U0001F64A"
+    font: '0'
+    index: 25
+    col: 7
+    row: 2
+    left: 2240
+    top: 768
+    width: 0.8
+  - text: "\U0001F412"
+    font: '0'
+    index: 26
+    col: 8
+    row: 2
+    left: 2560
+    top: 768
+    width: 0.8
+  - text: "\U0001F414"
+    font: '0'
+    index: 27
+    col: 0
+    row: 3
+    left: 0
+    top: 1152
+    width: 0.8
+  - text: "\U0001F427"
+    font: '0'
+    index: 28
+    col: 1
+    row: 3
+    left: 320
+    top: 1152
+    width: 0.8
+  - text: "\U0001F426"
+    font: '0'
+    index: 29
+    col: 2
+    row: 3
+    left: 640
+    top: 1152
+    width: 0.8
+  - text: "\U0001F424"
+    font: '0'
+    index: 30
+    col: 3
+    row: 3
+    left: 960
+    top: 1152
+    width: 0.8
+  - text: "\U0001F425"
+    font: '0'
+    index: 31
+    col: 4
+    row: 3
+    left: 1280
+    top: 1152
+    width: 0.8
+  - text: "\U0001F41D"
+    font: '0'
+    index: 32
+    col: 5
+    row: 3
+    left: 1600
+    top: 1152
+    width: 0.8
+  - text: "\U0001F41B"
+    font: '0'
+    index: 33
+    col: 6
+    row: 3
+    left: 1920
+    top: 1152
+    width: 0.8
+  - text: "\U0001F40C"
+    font: '0'
+    index: 34
+    col: 7
+    row: 3
+    left: 2240
+    top: 1152
+    width: 0.8
+  - text: "\U0001F422"
+    font: '0'
+    index: 35
+    col: 8
+    row: 3
+    left: 2560
+    top: 1152
+    width: 0.8
+  - text: "\U0001F40D"
+    font: '0'
+    index: 36
+    col: 0
+    row: 4
+    left: 0
+    top: 1536
+    width: 0.8
+  - text: "\U0001F419"
+    font: '0'
+    index: 37
+    col: 1
+    row: 4
+    left: 320
+    top: 1536
+    width: 0.8
+  - text: "\U0001F420"
+    font: '0'
+    index: 38
+    col: 2
+    row: 4
+    left: 640
+    top: 1536
+    width: 0.8
+  - text: "\U0001F41F"
+    font: '0'
+    index: 39
+    col: 3
+    row: 4
+    left: 960
+    top: 1536
+    width: 0.8
+  - text: "\U0001F421"
+    font: '0'
+    index: 40
+    col: 4
+    row: 4
+    left: 1280
+    top: 1536
+    width: 0.8
+  - text: "\U0001F42C"
+    font: '0'
+    index: 41
+    col: 5
+    row: 4
+    left: 1600
+    top: 1536
+    width: 0.8
+  - text: "\U0001F433"
+    font: '0'
+    index: 42
+    col: 6
+    row: 4
+    left: 1920
+    top: 1536
+    width: 0.8
+  - text: "\U0001F40B"
+    font: '0'
+    index: 43
+    col: 7
+    row: 4
+    left: 2240
+    top: 1536
+    width: 0.8
+  - text: "\U0001F40A"
+    font: '0'
+    index: 44
+    col: 8
+    row: 4
+    left: 2560
+    top: 1536
+    width: 0.8
+  - text: "\U0001F406"
+    font: '0'
+    index: 45
+    col: 0
+    row: 5
+    left: 0
+    top: 1920
+    width: 0.8
+  - text: "\U0001F405"
+    font: '0'
+    index: 46
+    col: 1
+    row: 5
+    left: 320
+    top: 1920
+    width: 0.8
+  - text: "\U0001F403"
+    font: '0'
+    index: 47
+    col: 2
+    row: 5
+    left: 640
+    top: 1920
+    width: 0.8
+  - text: "\U0001F402"
+    font: '0'
+    index: 48
+    col: 3
+    row: 5
+    left: 960
+    top: 1920
+    width: 0.8
+  - text: "\U0001F404"
+    font: '0'
+    index: 49
+    col: 4
+    row: 5
+    left: 1280
+    top: 1920
+    width: 0.8
+  - text: "\U0001F42A"
+    font: '0'
+    index: 50
+    col: 5
+    row: 5
+    left: 1600
+    top: 1920
+    width: 0.8
+  - text: "\U0001F42B"
+    font: '0'
+    index: 51
+    col: 6
+    row: 5
+    left: 1920
+    top: 1920
+    width: 0.8
+  - text: "\U0001F418"
+    font: '0'
+    index: 52
+    col: 7
+    row: 5
+    left: 2240
+    top: 1920
+    width: 0.8
+  - text: "\U0001F40E"
+    font: '0'
+    index: 53
+    col: 8
+    row: 5
+    left: 2560
+    top: 1920
+    width: 0.8
+  - text: "\U0001F416"
+    font: '0'
+    index: 54
+    col: 0
+    row: 6
+    left: 0
+    top: 2304
+    width: 0.8
+  - text: "\U0001F410"
+    font: '0'
+    index: 55
+    col: 1
+    row: 6
+    left: 320
+    top: 2304
+    width: 0.8
+  - text: "\U0001F40F"
+    font: '0'
+    index: 56
+    col: 2
+    row: 6
+    left: 640
+    top: 2304
+    width: 0.8
+  - text: "\U0001F411"
+    font: '0'
+    index: 57
+    col: 3
+    row: 6
+    left: 960
+    top: 2304
+    width: 0.8
+  - text: "\U0001F415"
+    font: '0'
+    index: 58
+    col: 4
+    row: 6
+    left: 1280
+    top: 2304
+    width: 0.8
+  - text: "\U0001F429"
+    font: '0'
+    index: 59
+    col: 5
+    row: 6
+    left: 1600
+    top: 2304
+    width: 0.8
+  - text: "\U0001F408"
+    font: '0'
+    index: 60
+    col: 6
+    row: 6
+    left: 1920
+    top: 2304
+    width: 0.8
+  - text: "\U0001F413"
+    font: '0'
+    index: 61
+    col: 7
+    row: 6
+    left: 2240
+    top: 2304
+    width: 0.8
+png: ef3ea253dd0e50872812fe9a8b5b2e4bb1505ec7.png
