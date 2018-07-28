@@ -19,7 +19,11 @@ options.font = function ( opt ) {
       family: opt
     }
 
-  return _.pick( opt, ['family', 'weight', 'css', 'style'] )
+  opt = _.defaults( {
+    weight: 400
+  }, opt )
+
+  return _.pick( opt, ['family', 'weight', 'css', 'style','glyphs'] )
 }
 
 options.geometry = function ( opt ) {

@@ -7,7 +7,10 @@ module.exports = function line( opt ) {
     y: 0,
     width: 0,
     size: 0,
+    height: NaN,
+    baseline: 0,
   })
+
 
   let glyphDefault = _.pick( opt, ['text','y','font','size'] )
   let glyphs = require('./string')( glyphDefault,  _.slice( arguments, 1 ) )
@@ -15,26 +18,40 @@ module.exports = function line( opt ) {
   if ( glyphs.length < 1 )
     return []
 
+  console.log('opt',opt)
+
+
   let measure = measureGlyphs( glyphs )
 
-  console.log('measure',measure)
+  // console.log('measure',measure)
 
   let { x, size, width, align } = opt
 
   align = alignment( { align, width, size, measure } )
-  console.log('state',{x,size,width, align})
+  // console.log('state',{x,size,width, align})
 
   layoutGlyphs()
-  placeGlyphs( { align })
+  placeGlyphs()
 
+
+  let { height } = opt
+
+  if ( isNaN( height ) ) 
+    height = align.size 
+
+  if ( glyphs.length ) {
+    glyphs[0].height = height
+  } else {
+    glyphs[0] = { height: height }
+  }
 
   return glyphs
 
   function layoutGlyphs() {
     let x = 0
     glyphs = glyphs.map( function ( glyph ) {
-      glyph.x = x
-      x += resolveNumber( glyph, 'width', glyph.width, 0 )
+      glyph = _.merge( glyph, { x } )
+      x += resolveNumber( glyph.width, 0 )
 
       return glyph
     } )
@@ -46,6 +63,8 @@ module.exports = function line( opt ) {
       gx *= align.size
       gx += align.x
       glyph.x = gx
+      glyph.y += ( parseFloat( opt.baseline ) || 0 ) * align.size
+
       glyph.size = align.size
     } )
   }

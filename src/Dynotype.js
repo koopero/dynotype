@@ -21,9 +21,15 @@ class Dynotype {
 
   addFont( font ) {
     font = options.font( font )
-
     this.fonts = this.fonts || []
+    let index = this.fonts.length
+
     this.fonts.push( font )
+
+    let glyphs = string( font.glyphs )
+    glyphs.push( { text: ' '} )
+    _.map( glyphs, glyph => glyph.font = index )
+    _.map( glyphs, glyph => this.addGlyphs( glyph ) )
   }
 
   addGlyphs() {
@@ -60,11 +66,13 @@ class Dynotype {
 
   getHash() {
     let glyphs = _.map( this.glyphs, glyph => _.pick( glyph, 'text', 'font' ) )
-    let fonts  = _.map( this.fonts,  font =>  _.pick( font, 'family', 'weight', 'css' ) )
+    let fonts  = _.map( this.fonts,  font =>  _.pick( font, 'family', 'weight', 'css', 'glyphs' ) )
     let geometry = _.pick( this.geometry, [ 'cellWidth', 'cellHeight'] )
     let hash = {
       geometry, glyphs, fonts
     }
+
+    console.log('hashing', hash )
 
     return hasher( hash )
   }
@@ -92,6 +100,55 @@ class Dynotype {
     glyphs = glyphs.map( glyph => this.glyph( glyph ) )
 
     return require('./line')( opt, glyphs )
+  }
+
+  lines( opt, lines ) {
+    if ( _.isArrayLike( opt ) ) {
+      lines = opt 
+      opt = null 
+    }
+
+    opt = _.defaults( opt, {
+      x: 0,
+      y: 0,
+      width: 0,
+      size: 0,
+      valign: 0,
+      height: NaN,
+      leading: 1,
+      baseline: 0,
+    } )
+
+    let { valign, leading, baseline } = opt
+    valign = parseFloat( valign ) || 0
+    leading = parseFloat( leading ) || 0
+
+    console.log( 'lines opt', opt )
+
+    let y = 0
+    let glyphs = _.map( lines, ( line, index ) => {
+      let glyphs = string( line )
+      let firstGlyphOpt = _.merge( {}, glyphs[0])
+      glyphs = glyphs.map( glyph => this.glyph( glyph ) )
+      _.merge( firstGlyphOpt, _.omit( glyphs[0], 'width','height' ) ) 
+      
+      let lineOpt = _.merge( {}, opt, { y, height: opt.height, baseline }, firstGlyphOpt  )
+      // console.log( 'lineOpt', glyphs[0], lineOpt )
+
+      glyphs = require('./line')( lineOpt, glyphs )
+      let { height } = glyphs[0]
+      height = parseFloat( height ) || 0
+      y += height * leading
+
+      return glyphs
+    } )
+
+    glyphs = _.flatten( glyphs )
+    glyphs.forEach( ( glyph ) => glyph.y += y * -( valign * 0.5 + 0.5 ) )
+    glyphs.forEach( ( glyph ) => glyph.y += baseline  )
+
+    return glyphs
+
   }
 
   async generate() {
@@ -163,7 +220,7 @@ class Dynotype {
       await this.load()
       return true
     } catch( e ) {
-
+      console.log('building instead of loading')
     }
     await this.generate()
     await this.save()
