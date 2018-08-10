@@ -14,16 +14,20 @@ options.Dynotype = function ( opt ) {
 }
 
 options.font = function ( opt ) {
+  console.log('options.font', opt )
+
   if ( _.isString( opt ) )
     opt = {
       family: opt
     }
 
-  opt = _.defaults( {
+  opt = _.extend( {
     weight: 400
   }, opt )
 
-  return _.pick( opt, ['family', 'weight', 'css', 'style','glyphs'] )
+  opt = _.pick( opt, ['family', 'weight', 'css', 'style','glyphs'] )
+  console.log('options.font', opt )
+  return opt
 }
 
 options.geometry = function ( opt ) {

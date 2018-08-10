@@ -18,7 +18,7 @@ module.exports = function line( opt ) {
   if ( glyphs.length < 1 )
     return []
 
-  console.log('opt',opt)
+  // console.log('opt',opt)
 
 
   let measure = measureGlyphs( glyphs )

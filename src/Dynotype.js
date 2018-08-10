@@ -123,8 +123,6 @@ class Dynotype {
     valign = parseFloat( valign ) || 0
     leading = parseFloat( leading ) || 0
 
-    console.log( 'lines opt', opt )
-
     let y = 0
     let glyphs = _.map( lines, ( line, index ) => {
       let glyphs = string( line )
@@ -154,7 +152,11 @@ class Dynotype {
   async generate() {
 
     this.fonts  = await Promise.all( this.fonts.map(
-      font => require('./fontfile')( { dir: this.dir, root: this.root, ...font } )
+      font => {
+        let fontOpt = { dir: this.dir, root: this.root, ...font }
+        console.log('fontOpt', fontOpt )
+        return require('./fontfile')( fontOpt )
+      }
     ) )
 
 
