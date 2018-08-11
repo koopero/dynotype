@@ -1,6 +1,7 @@
 const _ = require('lodash')
 async function html( {
   geom,
+  css = '',
   fonts = [],
   glyphs = [],
 } = {} ) {
@@ -32,6 +33,7 @@ async function html( {
 
   let data = {
     fonts,
+    css,
     rows: geom.rows,
     cols: geom.cols,
     fontSize: geom.size,

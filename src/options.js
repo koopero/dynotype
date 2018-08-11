@@ -8,14 +8,13 @@ options.Dynotype = function ( opt ) {
     dir:     '.',
     root:    '.',
     name:    '',
+    css:     ''
   }, opt )
 
   return opt
 }
 
 options.font = function ( opt ) {
-  console.log('options.font', opt )
-
   if ( _.isString( opt ) )
     opt = {
       family: opt
@@ -26,7 +25,6 @@ options.font = function ( opt ) {
   }, opt )
 
   opt = _.pick( opt, ['family', 'weight', 'css', 'style','glyphs'] )
-  console.log('options.font', opt )
   return opt
 }
 

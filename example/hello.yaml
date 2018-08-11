@@ -1,0 +1,20 @@
+# Name of the font sheet. This will be used for yaml, png and html file.
+name: hello-example
+
+# Glyphs to include in the sheet.
+glyphs: Hello, world! 👍 😁
+size: 48
+fonts: 
+  - family: 'Lobster'
+    # CSS for individual fonts needs a bit of tweaking.
+    css: |
+      top: 6px;
+      left: 6px;
+
+# Set the background. In real-world usage, 
+# transparent would better,
+# but this will show up in markdown.
+css: |
+  body {
+    background: #004
+  }  

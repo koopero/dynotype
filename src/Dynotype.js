@@ -68,8 +68,9 @@ class Dynotype {
     let glyphs = _.map( this.glyphs, glyph => _.pick( glyph, 'text', 'font' ) )
     let fonts  = _.map( this.fonts,  font =>  _.pick( font, 'family', 'weight', 'css', 'glyphs' ) )
     let geometry = _.pick( this.geometry, [ 'cellWidth', 'cellHeight'] )
+    let css = this.css
     let hash = {
-      geometry, glyphs, fonts
+      geometry, glyphs, fonts, css
     }
 
     console.log('hashing', hash )
@@ -154,7 +155,7 @@ class Dynotype {
     this.fonts  = await Promise.all( this.fonts.map(
       font => {
         let fontOpt = { dir: this.dir, root: this.root, ...font }
-        console.log('fontOpt', fontOpt )
+        // console.log('fontOpt', fontOpt )
         return require('./fontfile')( fontOpt )
       }
     ) )
@@ -164,6 +165,7 @@ class Dynotype {
       fonts: this.fonts,
       glyphs: this.glyphs,
       geom: this.geometry,
+      css: this.css,
     } )
 
     this.html = html.html
@@ -222,7 +224,7 @@ class Dynotype {
       await this.load()
       return true
     } catch( e ) {
-      console.log('building instead of loading')
+
     }
     await this.generate()
     await this.save()
