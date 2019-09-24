@@ -27,7 +27,7 @@ class Dynotype {
     this.fonts.push( font )
 
     let glyphs = string( font.glyphs )
-    glyphs.push( { text: ' '} )
+    // glyphs.push( { text: ' '} )
     _.map( glyphs, glyph => glyph.font = index )
     _.map( glyphs, glyph => this.addGlyphs( glyph ) )
   }
