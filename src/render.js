@@ -20,10 +20,11 @@ async function browserize( {
   let htmlFile = tempfile()+'.html'
 
   await fs.outputFile( htmlFile, html )
-  const browser = require('navit')({ timeout: 30000, engine: 'phantomjs' });
-  await browser.open(fileUrl( htmlFile ))
+  const browser = await require('puppeteer').launch();
+  const page = await browser.newPage()
+  await page.goto(fileUrl( htmlFile ))
   await new Promise( resolve => setTimeout( resolve, 300 ) )
-  await browser.screenshot( file ).run()
+  await page.screenshot( { path: file, omitBackground: true, fullPage: true } )
 
   let measure =
     function () {
@@ -41,7 +42,7 @@ async function browserize( {
       return result
     }
 
-  let measurements = await new Promise( resolve => browser.get.evaluate( measure, resolve ).run() )
+  let measurements = await page.waitForFunction( measure )
 
 
   glyphs = glyphs.map ( (glyph,index) => {

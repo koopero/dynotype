@@ -76,7 +76,7 @@ describe('Dynotype', () => {
       // dyno.addFont( { family: 'Quicksand', weight: 700 } )
 
       dyno.addGlyphs( test.math )
-      dyno.addGlyphs( {font:0},'🎨🔥🚬🐃' )
+      dyno.addGlyphs( {font:0},'🎨🔥🚬🐃👩🏿‍🎤' )
 
       dyno.setGeometry( { size: 48, rows: 6 } )
 

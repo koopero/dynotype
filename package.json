@@ -1,13 +1,13 @@
 {
   "name": "dynotype",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Specialized sprite sheet generator and typesetter",
   "main": "src/Dynotype.js",
   "bin": {
     "dynotype": "src/cli.js"
   },
   "scripts": {
-    "test": "mocha"
+    "test": "mocha -b"
   },
   "author": "Samm Zuest Cooper <samm@hfour.ca>",
   "license": "MIT",
@@ -22,10 +22,9 @@
     "html-entities": "^1.2.1",
     "js-yaml": "^3.10.0",
     "lodash": "^4.17.4",
-    "navit": "^3.1.0",
     "object-hash": "^1.2.0",
-    "phantomjs": "^2.1.7",
     "png-image": "^1.2.0",
+    "puppeteer": "^1.20.0",
     "request": "^2.83.0",
     "request-promise": "^4.2.2",
     "runes": "^0.4.3",
