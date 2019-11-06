@@ -23,8 +23,8 @@ function geometry( {
   if ( !cols && count )
     cols = Math.ceil( count / rows )
 
-  let cellWidth = Math.ceil( size * charWidth )
-  let cellHeight = Math.ceil( size * charHeight )
+  let cellWidth = Math.ceil( size )
+  let cellHeight = Math.ceil( size )
 
   let width = ( cellWidth ) * cols
   let height = ( cellHeight ) * rows

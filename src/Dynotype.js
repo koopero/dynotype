@@ -73,8 +73,6 @@ class Dynotype {
       geometry, glyphs, fonts, css
     }
 
-    console.log('hashing', hash )
-
     return hasher( hash )
   }
 
@@ -174,6 +172,7 @@ class Dynotype {
 
     let result = await require('./render')( {
       html,
+      htmlFile: this.filePath('.html'),
       glyphs: this.glyphs,
       geom: this.geometry,
       file: this.png,

@@ -10,14 +10,17 @@ async function browserize( {
   file,
   geom,
   html,
-  glyphs = []
+  glyphs = [],
+  htmlFile,
 } = {} ) {
 
   if ( _.isObject( html ) )
     html = html.html
 
 
-  let htmlFile = tempfile()+'.html'
+  htmlFile = htmlFile || tempfile()+'.html'
+  let dir = path.dirname( file )
+  await fs.ensureDir( dir )
 
   await fs.outputFile( htmlFile, html )
   const browser = await require('puppeteer').launch();
@@ -35,7 +38,7 @@ async function browserize( {
         var td = tds[i]
         var span = td.getElementsByTagName('span')[0]
         var rect = span.getBoundingClientRect()
-        rect = { x: rect.x, width: rect.width }
+        rect = [ rect.x, rect.y, rect.width, rect.height ]
         result[i] = {
           id: td.id,
           rect: rect
@@ -50,7 +53,17 @@ async function browserize( {
     let m = _.find( measurements, m => m.id == index )
     if ( !m ) return glyph
     delete glyph.html
-    return _.extend( glyph, { width: m.rect.width / geom.cellWidth } )
+
+    let rect = m.rect
+    rect[0] -= glyph.col * geom.cellWidth
+    rect[1] -= glyph.row * geom.cellHeight
+    rect[0] /= geom.cellWidth;
+    rect[1] /= geom.cellHeight;
+    rect[2] /= geom.cellWidth;
+    rect[3] /= geom.cellHeight;
+
+
+    return _.extend( glyph, { width: rect[2], measured: rect } )
   } )
 
   await browser.close()

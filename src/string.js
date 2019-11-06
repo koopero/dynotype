@@ -5,6 +5,10 @@ const Colour = require('deepcolour')
 module.exports = function string() {
   let glyphs = []
     , proto  = {}
+    , lastWasSpace = true
+    , word = -1
+    , wordChar = 0
+    , count = 0
 
   addArray( arguments )
 
@@ -30,12 +34,24 @@ module.exports = function string() {
 
   function addString( str ) {
     str = str.replace( /\r\n/g, '\n' )
-    runes( str ).forEach( addGlyph )
+    runes( str ).forEach( addCharacter )
+  }
+
+  function addCharacter( str ) {
+    let isSpace = !!str.match( /[\s\.\:\!\?\;\,]/ )
+    if ( !isSpace && lastWasSpace ) {
+      word ++
+      wordChar = 0
+    }
+    addGlyph( str )
+    wordChar ++
+    count ++
+    lastWasSpace = isSpace
   }
 
   function addGlyph( text ) {
     let glyph
-    glyph = _.defaults( { text }, proto )
+    glyph = _.defaults( { text, position: { words: word, word: wordChar, string: count } }, proto )
     glyphs.push( glyph )
   }
 
@@ -46,10 +62,10 @@ module.exports = function string() {
       || Colour
 
     let colour = new space( proto.colour )
-    console.log( 'EXTEND', { proto, colour, ob } )
     colour.set( ob.color )
     colour.set( ob.colour )
     proto = _.extend( {}, proto, ob )
     proto.colour = colour
   }
 }
+

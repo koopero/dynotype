@@ -1,4 +1,10 @@
 const _ = require('lodash')
+const emojiRegex = require('emoji-regex')()
+function isEmoji( str ) {
+  if ( !str ) return false
+  return !!str.match( emojiRegex )
+}
+
 async function html( {
   geom,
   css = '',
@@ -23,14 +29,20 @@ async function html( {
       glyph.col = col
       glyph.row = row
       glyph.index = index
-      tableRows[row].cols[col] = _.merge( glyph, {
+      let classes = ''
+
+      if ( isEmoji( glyph.text ) )
+        classes += 'emoji'
+
+      tableRows[row].cols[col] = _.merge( {}, glyph, {
         html: glyph.text == ' ' ? '&nbsp;' : glyph.text,
         left: geom.cellWidth * col,
         top: geom.cellHeight * row,
+        classes,
       } )
     }
   }
-
+  
   let data = {
     fonts,
     css,
@@ -61,3 +73,5 @@ async function loadTemplate() {
 }
 
 module.exports = html
+
+

@@ -18,6 +18,7 @@ describe('string', () => {
     let glyphs = string({font: 2}, 'Foo Bar')
 
     assert.equal( glyphs[2].font, 2 )
+    console.log( glyphs )
   })
 
 

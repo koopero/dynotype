@@ -59,11 +59,31 @@ let line = dyno.line('Hello, world!')
 
 [PhantomJS](http://phantomjs.org/download.html) is required for sheet generation.
 
+[ImageMagick](http://imagemagick.org/script/index.php) is required for blurring.
+
 The following is for **OSX**, using the [Homebrew](https://brew.sh/) package manager.
 
 ``` sh
-brew install phantomjs
+brew install phantomjs imagemagick
 npm install -g dynotype
+```
+
+# Usage
+
+## Multiple Fonts
+
+``` js
+const dyno = new Dynotype( {
+  glyphs: 'First Second Font,!',
+  fonts: [
+    { family: 'Roboto' },
+    { family: 'Lobster' }
+  ]
+})
+
+await dyno.refresh()
+
+let line = dyno.line( 'First Font, ', { font: 1 }, 'Second Font!' )
 ```
 
 
