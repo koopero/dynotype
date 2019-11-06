@@ -66,14 +66,18 @@ class Dynotype {
 
   getHash() {
     let glyphs = _.map( this.glyphs, glyph => _.pick( glyph, 'text', 'font' ) )
-    let fonts  = _.map( this.fonts,  font =>  _.pick( font, 'family', 'weight', 'css', 'glyphs' ) )
+    let fonts  = _.map( this.fonts,  font =>  { 
+      font.css = font.css || ''
+      return _.pick( font, 'family', 'weight', 'css' ) 
+    } )
     let geometry = _.pick( this.geometry, [ 'cellWidth', 'cellHeight'] )
     let css = this.css
     let hash = {
       geometry, glyphs, fonts, css
     }
+    let result = hasher( hash )
 
-    return hasher( hash )
+    return result
   }
 
   glyph() {
@@ -149,7 +153,6 @@ class Dynotype {
   }
 
   async generate() {
-
     this.fonts  = await Promise.all( this.fonts.map(
       font => {
         let fontOpt = { dir: this.dir, root: this.root, ...font }
@@ -223,7 +226,7 @@ class Dynotype {
       await this.load()
       return true
     } catch( e ) {
-
+      console.warn( e )
     }
     await this.generate()
     await this.save()
