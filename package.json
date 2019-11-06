@@ -1,6 +1,6 @@
 {
   "name": "dynotype",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Specialized sprite sheet generator and typesetter",
   "main": "src/Dynotype.js",
   "bin": {
@@ -14,6 +14,7 @@
   "dependencies": {
     "commander": "^2.17.1",
     "datauri": "^1.0.5",
+    "deepcolour": "^2.0.0",
     "escape-string-regexp": "^1.0.5",
     "file-url": "^2.0.2",
     "font-awesome": "^4.7.0",
