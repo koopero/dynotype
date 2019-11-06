@@ -22,6 +22,7 @@ async function browserize( {
   await fs.outputFile( htmlFile, html )
   const browser = await require('puppeteer').launch();
   const page = await browser.newPage()
+
   await page.goto(fileUrl( htmlFile ))
   await new Promise( resolve => setTimeout( resolve, 300 ) )
   await page.screenshot( { path: file, omitBackground: true, fullPage: true } )
@@ -34,6 +35,7 @@ async function browserize( {
         var td = tds[i]
         var span = td.getElementsByTagName('span')[0]
         var rect = span.getBoundingClientRect()
+        rect = { x: rect.x, width: rect.width }
         result[i] = {
           id: td.id,
           rect: rect
@@ -42,8 +44,7 @@ async function browserize( {
       return result
     }
 
-  let measurements = await page.waitForFunction( measure )
-
+  let measurements = await page.evaluate( measure )
 
   glyphs = glyphs.map ( (glyph,index) => {
     let m = _.find( measurements, m => m.id == index )
