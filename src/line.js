@@ -1,7 +1,7 @@
 const _ = require('lodash')
+const Colour = require('deepcolour')
 
 module.exports = function line( opt ) {
-
   opt = _.defaults( opt, {
     x: 0,
     y: 0,
@@ -9,10 +9,13 @@ module.exports = function line( opt ) {
     size: 0,
     height: NaN,
     baseline: 0,
+    colour: 'white',
+    space: Colour,
   })
 
+  opt.colour = new (opt.space)( opt.colour )
 
-  let glyphDefault = _.pick( opt, ['text','y','font','size'] )
+  let glyphDefault = _.pick( opt, ['text','y','font','size','colour'] )
   let glyphs = require('./string')( glyphDefault,  _.slice( arguments, 1 ) )
 
   if ( glyphs.length < 1 )

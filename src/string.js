@@ -1,5 +1,6 @@
 const _ = require('lodash')
-    , runes = require('runes')
+const runes = require('runes')
+const Colour = require('deepcolour')
 
 module.exports = function string() {
   let glyphs = []
@@ -21,7 +22,7 @@ module.exports = function string() {
       return addArray( ob )
 
     if ( _.isObject( ob ) ) {
-      proto = _.extend( {}, proto, ob )
+      extendProto( ob )
       if ( ob.text )
         addAny( ob.text )
     }
@@ -36,5 +37,19 @@ module.exports = function string() {
     let glyph
     glyph = _.defaults( { text }, proto )
     glyphs.push( glyph )
+  }
+
+  function extendProto( ob ) {
+    let space = 
+      ( proto.colour && proto.colour.space ) 
+      || ( ob.colour && ob.colour.space ) 
+      || Colour
+
+    let colour = new space( proto.colour )
+    console.log( 'EXTEND', { proto, colour, ob } )
+    colour.set( ob.color )
+    colour.set( ob.colour )
+    proto = _.extend( {}, proto, ob )
+    proto.colour = colour
   }
 }

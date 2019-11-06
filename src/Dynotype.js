@@ -97,7 +97,7 @@ class Dynotype {
 
   line( opt ) {
 
-    let glyphs = string( _.pick( opt, 'y', 'text', 'font' ), _.slice( arguments, 1 ) )
+    let glyphs = string( _.pick( opt, 'y', 'text', 'font','colour' ), _.slice( arguments, 1 ) )
     glyphs = glyphs.map( glyph => this.glyph( glyph ) )
 
     return require('./line')( opt, glyphs )
@@ -161,7 +161,7 @@ class Dynotype {
     ) )
 
 
-    let html = await require('../src/html')( {
+    let html = await require('./html')( {
       fonts: this.fonts,
       glyphs: this.glyphs,
       geom: this.geometry,
@@ -172,7 +172,7 @@ class Dynotype {
     this.glyphs = html.glyphs
     this.png = this.png || this.filePath('.png' )
 
-    let result = await require('../src/render')( {
+    let result = await require('./render')( {
       html,
       glyphs: this.glyphs,
       geom: this.geometry,
