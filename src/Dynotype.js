@@ -1,10 +1,11 @@
 const options = require('./options')
-    , string  = require('./string')
-    , _ = require('lodash')
-    , path = require('path')
-    , yaml = require('js-yaml')
-    , fs = require('fs-extra')
-    , hasher = require('object-hash')
+const string  = require('./string')
+const _ = require('lodash')
+const path = require('path')
+const yaml = require('js-yaml')
+const fs = require('fs-extra')
+const hasher = require('object-hash')
+const { glyphsAreEqual, glyphMinimize } = require('./util')
 
 class Dynotype {
   constructor( opt ) {
@@ -39,11 +40,12 @@ class Dynotype {
 
     let newGlyphs = string( arguments )
     _.map( newGlyphs, glyph => {
+      glyph = glyphMinimize( glyph )
       let fonts = _.isNumber( glyph.font ) ? [ glyph.font ] : fontKeys
 
       fonts.map( font => {
         glyph.font = font
-        if ( !_.find( this.glyphs, oldGlyph => glyphsEq( glyph, oldGlyph ) ) ) {
+        if ( !_.find( this.glyphs, oldGlyph => glyphsAreEqual( glyph, oldGlyph ) ) ) {
           glyph.index = this.glyphs.length
           this.glyphs.push( { ...glyph } )
         }
@@ -231,8 +233,5 @@ class Dynotype {
   }
 }
 
-function glyphsEq( a, b ) {
-  return a.text == b.text && a.font == b.font
-}
 
 module.exports = Dynotype
