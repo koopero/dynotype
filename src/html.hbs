@@ -58,6 +58,12 @@
     span {
       display: inline-block;
       position: relative;
+      vertical-align: text-top;
+      margin-left: 2px;
+    }
+
+    span.emoji {
+      margin-top: 0.1em;
     }
 
     {{{css}}}
@@ -69,7 +75,7 @@
     {{#tableRows}}
     <tr>
       {{#cols}}
-        <td id='{{index}}' style='top: {{top}}px; left: {{left}}px;'><span class='font{{ font }}'>{{{html}}}</span></td>
+        <td id='{{index}}' style='top: {{top}}px; left: {{left}}px;'><span class='font{{ font }} {{ classes }}'>{{{html}}}</span></td>
       {{/cols}}
     </tr>
     {{/tableRows}}

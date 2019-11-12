@@ -6,6 +6,10 @@ const { glyphIsCharacter, glyphTemplate } = require('./util')
 module.exports = function string() {
   let glyphs = []
     , proto  = {}
+    , lastWasSpace = true
+    , word = -1
+    , wordChar = 0
+    , count = 0
 
   addArray( arguments )
 
@@ -35,11 +39,24 @@ module.exports = function string() {
 
   function addString( str ) {
     str = str.replace( /\r\n/g, '\n' )
-    runes( str ).forEach( text => addGlyph( { text } ) )
+    runes( str ).forEach( addCharacter )
+  }
+
+
+  function addCharacter( text ) {
+    let isSpace = !!text.match( /[\s\.\:\!\?\;\,]/ )
+    if ( !isSpace && lastWasSpace ) {
+      word ++
+      wordChar = 0
+    }
+    addGlyph( { text } )
+    wordChar ++
+    count ++
+    lastWasSpace = isSpace
   }
 
   function addGlyph( glyph ) {
-    glyph = _.defaults( glyph, proto )
+    glyph = _.defaults( glyph, { position: { words: word, word: wordChar, string: count } }, proto )
     glyphs.push( glyph )
   }
 
@@ -61,3 +78,4 @@ module.exports = function string() {
     }
   }
 }
+

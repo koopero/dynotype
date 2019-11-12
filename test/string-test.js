@@ -22,7 +22,7 @@ describe('string', () => {
     let glyphs = string( { src: 'img/foo1.png' }, '👩🏿‍🎤', { src: 'img/foo2.png' } )
     assert.isArray( glyphs )
     assert.equal( glyphs.length, 3 )
-    assert.deepEqual( glyphs[2], { src: 'img/foo2.png' } )
+    assert.include( glyphs[2], { src: 'img/foo2.png' } )
   })
 
   it('passes colours', () => {
