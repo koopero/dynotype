@@ -53,8 +53,9 @@ module.exports = function line( opt ) {
   function layoutGlyphs() {
     let x = 0
     glyphs = glyphs.map( function ( glyph ) {
-      glyph = _.merge( glyph, { x } )
-      x += resolveNumber( glyph.width, 0 )
+      let w = resolveNumber( glyph.width, 0 )
+      glyph = _.merge( glyph, { x: x + w / 2 } )
+      x += w
 
       return glyph
     } )

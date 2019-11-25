@@ -12,8 +12,7 @@ async function html( {
   glyphs = [],
 } = {} ) {
 
-  fonts = fonts.map( ( font, index ) => ( { ...font, index } ) )
-
+  fonts = fonts.map( ( font, index ) => ( { ...font, index, fontSize: font.fontSize || geom.fontSize } ) )
   glyphs = glyphs.map( ( glyph ) => ({ ...glyph, font: glyph.font || 0 } ) )
   // glyphs = await Promise.all( glyphs )
 
@@ -48,9 +47,10 @@ async function html( {
     css,
     rows: geom.rows,
     cols: geom.cols,
-    fontSize: geom.size,
+    fontSize: geom.fontSize,
     cellWidth: geom.cellWidth,
     cellHeight: geom.cellHeight,
+    gutter: geom.gutter,
     width: geom.width,
     height: geom.height,
     tableRows

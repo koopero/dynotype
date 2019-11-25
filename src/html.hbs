@@ -33,6 +33,7 @@
       font-family: '{{family}}';
       font-style: normal;
       font-weight: {{weight}};
+      font-size: {{fontSize}}px;
       {{{css}}}
     }
     {{/fonts}}
@@ -50,7 +51,6 @@
     }
 
     td {
-      font-size: {{fontSize}}px;
       color: white;
       position: absolute;
     }
@@ -59,7 +59,8 @@
       display: inline-block;
       position: relative;
       vertical-align: text-top;
-      margin-left: 2px;
+      top: {{gutter}}px;
+      left: {{gutter}}px;
     }
 
     span.emoji {

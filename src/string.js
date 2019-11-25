@@ -61,7 +61,8 @@ module.exports = function string() {
       || ( ob.colour && ob.colour.space ) 
       || Colour
 
-    let colour = new space( proto.colour )
+    let colour = new space( 'white' )
+    colour.set( proto.colour )
     colour.set( ob.color )
     colour.set( ob.colour )
     proto = _.extend( {}, proto, ob )
