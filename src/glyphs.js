@@ -1,6 +1,7 @@
 module.exports = glyphs
 const _ = require('lodash')
-    , runes = require('runes')
+const runes = require('runes')
+const { glyphsAreEqual } = require('./util')
 
 function glyphs( {
   include = 'abcdedfghijklmnopqrstuvxyz',
@@ -17,7 +18,7 @@ function glyphs( {
   } )
 
   glyphs = _.filter( glyphs, _.isObject )
-  glyphs = _.uniqWith( glyphs, ( a,b ) => a.text == b.text && a.font == b.font  )
+  glyphs = _.uniqWith( glyphs, ( a,b ) => glyphsAreEqual( a, b )  )
 
 
   return glyphs

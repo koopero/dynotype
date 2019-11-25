@@ -1,6 +1,7 @@
 const _ = require('lodash')
 const runes = require('runes')
 const Colour = require('deepcolour')
+const { glyphIsCharacter, glyphTemplate } = require('./util')
 
 module.exports = function string() {
   let glyphs = []
@@ -29,6 +30,10 @@ module.exports = function string() {
       extendProto( ob )
       if ( ob.text )
         addAny( ob.text )
+      if ( ob.src ) 
+        addGlyph( _.pick( ob, 'src' ) )
+      if ( ob.icon ) 
+        addGlyph( _.pick( ob, 'icon' ) )
     }
   }
 
@@ -37,36 +42,43 @@ module.exports = function string() {
     runes( str ).forEach( addCharacter )
   }
 
-  function addCharacter( str ) {
-    let isSpace = !!str.match( /[\s\.\:\!\?\;\,]/ )
+
+  function addCharacter( text ) {
+    let isSpace = !!text.match( /[\s\.\:\!\?\;\,]/ )
     if ( !isSpace && lastWasSpace ) {
       word ++
       wordChar = 0
     }
-    addGlyph( str )
+    addGlyph( { text } )
     wordChar ++
     count ++
     lastWasSpace = isSpace
   }
 
-  function addGlyph( text ) {
-    let glyph
-    glyph = _.defaults( { text, position: { words: word, word: wordChar, string: count } }, proto )
+  function addGlyph( glyph ) {
+    glyph = _.defaults( glyph, { position: { words: word, word: wordChar, string: count } }, proto )
     glyphs.push( glyph )
   }
 
   function extendProto( ob ) {
-    let space = 
-      ( proto.colour && proto.colour.space ) 
-      || ( ob.colour && ob.colour.space ) 
-      || Colour
-
-    let colour = new space( 'white' )
-    colour.set( proto.colour )
-    colour.set( ob.color )
-    colour.set( ob.colour )
+    ob = glyphTemplate( ob )
+    let protoColour = proto.colour
     proto = _.extend( {}, proto, ob )
-    proto.colour = colour
+
+    if ( protoColour || ob.color || ob.colour ) {
+      let space = 
+        ( protoColour && protoColour.space ) 
+        || ( ob.colour && ob.colour.space ) 
+        || ( ob.color && ob.color.space ) 
+        || Colour
+
+      let colour = new space( 'white' )
+      colour.set( proto.colour )
+      colour.set( ob.color )
+      colour.set( ob.colour )
+      proto = _.extend( {}, proto, ob )
+      proto.colour = colour
+    }
   }
 }
 
