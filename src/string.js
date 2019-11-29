@@ -56,7 +56,8 @@ module.exports = function string() {
   }
 
   function addGlyph( glyph ) {
-    glyph = _.defaults( glyph, { position: { words: word, word: wordChar, string: count } }, proto )
+    let position = { words: word, word: wordChar, string: count }
+    glyph = _.defaults( glyph, { position }, proto )
     glyphs.push( glyph )
   }
 
@@ -73,10 +74,9 @@ module.exports = function string() {
         || Colour
 
       let colour = new space( 'white' )
-      colour.set( proto.colour )
+      colour.set( protoColour )
       colour.set( ob.color )
       colour.set( ob.colour )
-      proto = _.extend( {}, proto, ob )
       proto.colour = colour
     }
   }

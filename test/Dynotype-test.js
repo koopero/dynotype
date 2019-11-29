@@ -44,8 +44,8 @@ describe('Dynotype', () => {
 
       dyno.addGlyphs( 'foo', { font: 1 }, 'bar' )
 
-      assert.deepEqual( dyno.glyph( 'f' ), { font: 0, index: 0, text: 'f' } )
-      assert.deepEqual( dyno.glyph( 'a' ), { font: 1, index: 3, text: 'a' } )
+      assert.include( dyno.glyph( 'f' ), { font: 0, index: 0, text: 'f' } )
+      assert.include( dyno.glyph( 'a' ), { font: 1, index: 3, text: 'a' } )
       assert.deepEqual( dyno.glyph( { font: 0 }, 'a' ), undefined )
     })
   })

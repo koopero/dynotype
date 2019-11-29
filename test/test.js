@@ -20,6 +20,7 @@ test.fonts = async function () {
       family: 'Noto Sans',
       weight: 400
     }),
+    
     require('../src/fontfile')( {
       root: test.scratchPath(),
       dir: '.',
@@ -33,7 +34,7 @@ test.fonts = async function () {
 
 test.glyphs = function () {
   let glyphs = require('../src/glyphs')( {
-    include: ' ꠀ	ꠁ	ꠂ	ꠃ	ꠄ	ꠅ	꠆	ꠇ	ꠈ	ꠉ	ꠊ	ꠋ	ꠌ	ꠍ	ꠎ	ꠏ The Quick Brown Fox Jumped Over The Lazy Sheep Dog 👩‍ 👦🎨🔥🚬🍤🍳🎥🎮🐃 0123456789 !@#$%^&*()=_+\\/\'"[]{};:.,?~'
+    include: 'The Quick Brown Fox Jumped Over The Lazy Sheep Dog 👩‍ 👦🎨🔥🚬🍤🍳🎥🎮🐃 0123456789 !@#$%^&*()=_+\\/\'"[]{};:.,?~'
   })
 
   return glyphs
