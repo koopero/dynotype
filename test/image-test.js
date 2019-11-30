@@ -21,5 +21,9 @@ describe('image', () => {
 
     await dyno.generate()
     await dyno.save()
+
+
+    let glyph = dyno.glyph( { src: 'image/heptagon.png' } )
+    test.assert( glyph )
   })
 })
