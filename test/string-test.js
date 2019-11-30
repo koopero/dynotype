@@ -25,6 +25,10 @@ describe('string', () => {
     assert.include( glyphs[2], { src: 'img/foo2.png' } )
   })
 
+  xit('passes icons', () => {
+    let glyphs = string( {icon:'fa'})
+  })
+
   it('passes colours', () => {
     let glyphs = string( { colour: 'red' }, 'foo', { text: 'bar', colour: { hue: 4/6 } } )
     assert.isArray( glyphs )

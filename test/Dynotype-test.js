@@ -71,10 +71,6 @@ describe('Dynotype', () => {
       } )
 
       dyno.addFont( { family: 'Pacifico', weight: 400 } )
-      // dyno.addFont( { family: 'Quicksand', weight: 400 } )
-      // dyno.addFont( { family: 'Quicksand', weight: 500 } )
-      // dyno.addFont( { family: 'Quicksand', weight: 700 } )
-
       dyno.addGlyphs( test.math )
       dyno.addGlyphs( {font:0},'🎨🔥🚬🐃👩🏿‍🎤' )
 

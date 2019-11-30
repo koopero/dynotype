@@ -41,17 +41,21 @@ class Dynotype {
     let newGlyphs = string( arguments )
     _.map( newGlyphs, glyph => {
       glyph = glyphMinimize( glyph )
-      let fonts = _.isNumber( glyph.font ) ? [ glyph.font ] : fontKeys
 
-      fonts.map( font => {
-        glyph.font = font
-        if ( !_.find( this.glyphs, oldGlyph => glyphsAreEqual( glyph, oldGlyph ) ) ) {
-          glyph.index = this.glyphs.length
-          this.glyphs.push( { ...glyph } )
-        }
-      } )
+      if ( glyph.text ) {
+        let fonts = _.isNumber( glyph.font ) ? [ glyph.font ] : fontKeys
+        fonts.map( font => {
+          glyph.font = font
+          if ( !_.find( this.glyphs, oldGlyph => glyphsAreEqual( glyph, oldGlyph ) ) ) {
+            glyph.index = this.glyphs.length
+            this.glyphs.push( glyph )
+          }
+        } )
+      } else {
+        glyph.index = this.glyphs.length
+        this.glyphs.push( glyph )
+      }
     } )
-
   }
 
   setGeometry( opt ) {
@@ -163,12 +167,12 @@ class Dynotype {
       }
     ) )
 
-
     let html = await require('./html')( {
       fonts: this.fonts,
       glyphs: this.glyphs,
       geom: this.geometry,
       css: this.css,
+      root: this.root,
     } )
 
     this.html = html.html

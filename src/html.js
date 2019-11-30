@@ -1,5 +1,12 @@
 const _ = require('lodash')
+const fileUrl = require('file-url')
+const path = require('path')
 const emojiRegex = require('emoji-regex')()
+const fs = require('fs-extra')
+const Handlebars = require('handlebars')
+const { promisify } = require('util')
+const imageSize = promisify(require('image-size'))
+
 function isEmoji( str ) {
   if ( !str ) return false
   return !!str.match( emojiRegex )
@@ -7,6 +14,7 @@ function isEmoji( str ) {
 
 async function html( {
   geom,
+  root,
   css = '',
   fonts = [],
   glyphs = [],
@@ -14,10 +22,6 @@ async function html( {
 
   fonts = fonts.map( ( font, index ) => ( { ...font, index, fontSize: font.fontSize || geom.fontSize } ) )
   glyphs = glyphs.map( ( glyph ) => ({ ...glyph, font: glyph.font || 0 } ) )
-  // glyphs = await Promise.all( glyphs )
-
-
-
 
   let tableRows = []
   for ( let row = 0; row < geom.rows; row++ ) {
@@ -28,17 +32,7 @@ async function html( {
       glyph.col = col
       glyph.row = row
       glyph.index = index
-      let classes = ''
-
-      if ( isEmoji( glyph.text ) )
-        classes += 'emoji'
-
-      tableRows[row].cols[col] = _.merge( {}, glyph, {
-        html: glyph.text == ' ' ? '&nbsp;' : glyph.text,
-        left: geom.cellWidth * col,
-        top: geom.cellHeight * row,
-        classes,
-      } )
+      tableRows[row].cols[col] = await glyphToHTML( { glyph, geom, root } )
     }
   }
   
@@ -62,9 +56,41 @@ async function html( {
   return { html, glyphs }
 }
 
-const path = require('path')
-    , fs = require('fs-extra')
-    , Handlebars = require('handlebars')
+async function glyphToHTML( { glyph, geom, root } ) {
+  let classes = ''
+  let html
+  
+  if ( glyph.src ) {
+    let { src } = glyph
+    src = path.resolve( root, src )
+    let [ width, height ] = await srcSize( { src, geom } )
+    html = `<span><img width=${width} height=${height} src='${fileUrl( src )}'/></span>`
+  } else if ( glyph.text ) {
+    if ( isEmoji( glyph.text ) )
+      classes += 'emoji '
+
+    html = glyph.text == ' ' ? '&nbsp;' : glyph.text
+    html = `<span class='font${ glyph.font }'>${html}</span>`
+  }
+
+  glyph = _.merge( {}, glyph, {
+    html,
+    left: geom.cellWidth * glyph.col,
+    top: geom.cellHeight * glyph.row,
+    classes,
+  } )
+
+  return glyph
+}
+
+async function srcSize( { src, geom } ) {
+  let size = await imageSize( src )
+  let scale = Math.min(
+    (geom.cellWidth-geom.gutter*2) / size.width,
+    (geom.cellHeight-geom.gutter*2) / size.height
+  )
+  return [ size.width * scale, size.height * scale ]
+}
 
 async function loadTemplate() {
   let file = path.resolve( __dirname, 'html.hbs' )

@@ -15,5 +15,11 @@ function glyphTemplate( glyph ) {
 } 
 
 function glyphMinimize( glyph ) {
+  if ( glyph.src )
+    return _.pick( glyph, ['src'] )
+
+  if ( glyph.icon )
+    return _.pick( glyph, ['icon'] )
+
   return _.pick( glyph, ['font','index','text'])
 }
