@@ -38,6 +38,13 @@ class Dynotype {
     if ( !fontKeys.length )
       fontKeys = [ 0 ]
 
+    const addGlyph = ( glyph ) => {
+      if ( !_.find( this.glyphs, oldGlyph => glyphsAreEqual( glyph, oldGlyph ) ) ) {
+        glyph.index = this.glyphs.length
+        this.glyphs.push( glyph )
+      }
+    }
+
     let newGlyphs = string( arguments )
     _.map( newGlyphs, glyph => {
       glyph = glyphMinimize( glyph )
@@ -46,16 +53,14 @@ class Dynotype {
         let fonts = _.isNumber( glyph.font ) ? [ glyph.font ] : fontKeys
         fonts.map( font => {
           glyph.font = font
-          if ( !_.find( this.glyphs, oldGlyph => glyphsAreEqual( glyph, oldGlyph ) ) ) {
-            glyph.index = this.glyphs.length
-            this.glyphs.push( glyph )
-          }
+          addGlyph( glyph )
         } )
       } else {
-        glyph.index = this.glyphs.length
-        this.glyphs.push( glyph )
+        addGlyph( glyph )
       }
     } )
+
+
   }
 
   setGeometry( opt ) {

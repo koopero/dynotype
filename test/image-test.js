@@ -13,6 +13,10 @@ describe('image', () => {
     dyno.addGlyphs( { src: 'image/heptagon.png' } )
     dyno.addGlyphs( { src: 'image/wide.jpg' } )
     dyno.addGlyphs( { src: 'image/tall.jpg' } )
+
+    // intentional double
+    dyno.addGlyphs( { src: 'image/heptagon.png' } )
+
     dyno.setGeometry( { size: 128 } )
 
     await dyno.generate()

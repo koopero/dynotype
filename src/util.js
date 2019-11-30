@@ -3,7 +3,7 @@ module.exports = { glyphsAreEqual, glyphIsCharacter, glyphMinimize, glyphTemplat
 const _ = require('lodash')
 
 function glyphsAreEqual( A, B ) {
-  return A.text == B.text && A.font == B.font
+  return A.text == B.text && A.font == B.font && A.src == B.src
 }
 
 function glyphIsCharacter( A ) {
