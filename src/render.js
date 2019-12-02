@@ -32,11 +32,13 @@ async function browserize( {
 
   let measure =
     function () {
-      var tds = document.getElementsByTagName('td');
+      var tds = document.getElementsByTagName('td')
       var result = [];
       for ( var i = 0; i < tds.length; i ++ ) {
         var td = tds[i]
         var span = td.getElementsByTagName('span')[0]
+        if ( !span )
+          continue
         var rect = span.getBoundingClientRect()
         rect = [ rect.x, rect.y, rect.width, rect.height ]
         result[i] = {
