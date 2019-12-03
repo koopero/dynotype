@@ -59,8 +59,6 @@ class Dynotype {
         addGlyph( glyph )
       }
     } )
-
-
   }
 
   setGeometry( opt ) {
@@ -194,7 +192,13 @@ class Dynotype {
   }
 
   filePath( extension ) {
-    let name = this.name || this.getHash()
+    let name
+
+    if ( !this.hashname ) 
+      name = this.name || this.getHash()
+    else
+      name = this.name +'_'+this.getHash()
+    
     let file = this.resolvePath( `${name}${extension}` )
     return file
   }

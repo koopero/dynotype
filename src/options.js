@@ -1,5 +1,5 @@
 const options = exports
-    , _ = require('lodash')
+const _ = require('lodash')
 
 options.Dynotype = function ( opt ) {
   opt = _.extend( {
@@ -8,7 +8,8 @@ options.Dynotype = function ( opt ) {
     dir:     '.',
     root:    '.',
     name:    '',
-    css:     ''
+    css:     '',
+    hashname:   false,
   }, opt )
 
   return opt
