@@ -17,6 +17,7 @@ class Dynotype {
 
     _.map( opt.fonts, font => this.addFont( font ) )
     this.addGlyphs( opt.glyphs )
+    this.addMissing( opt.missing )
     this.setGeometry( opt.geometry || opt )
   }
 
@@ -61,6 +62,19 @@ class Dynotype {
     } )
   }
 
+  addMissing( missing ) {
+    missing = string( missing )
+    if ( missing.length < 1 )
+      return 
+
+    if ( missing.length > 1 )
+      throw new Error('missing character must be one glyph')
+
+    missing.font = 0
+    this.addGlyphs( missing )
+    this.missing = missing
+  }
+
   setGeometry( opt ) {
     opt = options.geometry( opt )
     opt.glyphs = this.glyphs
@@ -93,15 +107,29 @@ class Dynotype {
     let args = string( arguments )
     let search = args[0]
 
+    const missing = () => {
+      let { missing } = this
+      if ( !missing )
+        return
+
+      if ( _.isUndefined( missing.index ) ) {
+        this.missing = missing = this.glyph( missing )
+        this.missing.isMissing = true
+        Object.freeze( this.missing )
+      }
+
+      return missing
+    }
+
     if ( !search )
-      return
+      return missing()
 
     let ourGlyph = _.find( this.glyphs, testGlyph =>
       search.text == testGlyph.text && ( _.isUndefined( search.font ) || search.font == testGlyph.font )
     )
 
     if ( !ourGlyph )
-      return
+      return missing()
 
     return _.extend( search, ourGlyph )
   }

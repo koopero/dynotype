@@ -9,6 +9,7 @@ options.Dynotype = function ( opt ) {
     root:    '.',
     name:    '',
     css:     '',
+    missing: ' ',
     hashname:   false,
   }, opt )
 

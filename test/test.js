@@ -4,6 +4,7 @@ const fs = require('fs-extra')
 
 test.zoo = '🐵🐶🐻🐶🐱🐭🐹🐰🐻🐼🐨🐯🐮🐷🐸🐵🙈🙉🙊🐒🐔🐧🐦🐤🐥🐝🐛🐌🐢🐍🐙🐠🐟🐡🐬🐳🐋🐊🐆🐅🐃🐂🐄🐪🐫🐘🐎🐖🐐🐏🐑🐕🐩🐈🐓'
 test.math = '0123456789xXeEn-+÷=*+.:()t¼½¾[]{}*/<>!?π'
+test.octal = '01234567'
 test.alphaNumeric = ' abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ01234567890'
 test.assert = require('chai').assert
 
