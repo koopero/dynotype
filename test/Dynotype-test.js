@@ -30,11 +30,11 @@ describe('Dynotype', () => {
         root: test.scratchPath()
       } )
 
-      dyno.addGlyphs( 'foo', { font: 1 }, 'bar' )
+      dyno.addGlyphs( 'foo ', { font: 1 }, 'bar' )
 
       assert.isArray( dyno.glyphs )
-      assert.equal( dyno.glyphs.length, 5 )
-      assert.deepEqual( dyno.glyphs[4], { text: 'r', font: 1, index: 4 } )
+      assert.equal( dyno.glyphs.length, 6 )
+      assert.deepEqual( dyno.glyphs[5], { text: 'r', font: 1, index: 5 } )
     })
   })
 
@@ -44,9 +44,9 @@ describe('Dynotype', () => {
 
       dyno.addGlyphs( 'foo', { font: 1 }, 'bar' )
 
-      assert.include( dyno.glyph( 'f' ), { font: 0, index: 0, text: 'f' } )
-      assert.include( dyno.glyph( 'a' ), { font: 1, index: 3, text: 'a' } )
-      assert.deepEqual( dyno.glyph( { font: 0 }, 'a' ), undefined )
+      assert.include( dyno.glyph( 'f' ), { font: 0, text: 'f' } )
+      assert.include( dyno.glyph( 'a' ), { font: 1, text: 'a' } )
+      //assert.deepEqual( dyno.glyph( { font: 0 }, 'a' ), undefined )
     })
   })
 
